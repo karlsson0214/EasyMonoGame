@@ -70,8 +70,10 @@ namespace EasyMonoGame
         /// Add an actor to this world.
         /// </summary>
         /// <param name="actor"></param>
-        public void Add(Actor actor)
+        public void Add(Actor actor, string imageName, float x, float y)
         {
+            actor.ImageName = imageName;
+            actor.Position = new Vector2(x, y);
             // if not has type => add type to dictionary and create list
             if (actors.TryGetValue(actor.GetType(), out List<Actor> actorsOfType))
             {

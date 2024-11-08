@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using Vector2 = Microsoft.Xna.Framework.Vector2;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace EasyMonoGame
+namespace EasyMonoGame 
 {
     /// <summary>
     /// An Actor is an objekt in the game world.
