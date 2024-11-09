@@ -69,11 +69,11 @@ namespace EasyMonoGame
         {
             get
             {
-                /*
+                
                 if (image == null)
                 {
-                    image = GameArt.Get(imageName);
-                }*/
+                    return 1; // image not loaded yet
+                }
                 return (image.Width + image.Height) / 4;
             }
         }
