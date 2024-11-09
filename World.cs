@@ -74,6 +74,11 @@ namespace EasyMonoGame
         {
             actor.ImageName = imageName;
             actor.Position = new Vector2(x, y);
+            // LoadContent in EasyGame has been called and actor.Image is null. => Set image from GameArt.
+            if (EasyGame.Instance.HasLoadedContent && actor.Image == null)
+            {
+                actor.Image = GameArt.Get(actor.ImageName);
+            }
             // if not has type => add type to dictionary and create list
             if (actors.TryGetValue(actor.GetType(), out List<Actor> actorsOfType))
             {
@@ -192,7 +197,11 @@ namespace EasyMonoGame
 
         private void TileBackground(SpriteBatch spriteBatch)
         {
-            if (backgroundTile == null && backgroundTileName != null)
+            if (backgroundTileName == null)
+            {
+                return;
+            }
+            if (backgroundTile == null)
             {
                 backgroundTile = GameArt.Get(backgroundTileName);
             }
