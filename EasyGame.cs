@@ -12,25 +12,26 @@ namespace EasyMonoGame
         private SpriteBatch spriteBatch;
         private World activeWorld;
         private static EasyGame instance;
+        private bool hasLoadedContent = false;
 
-        public EasyGame(World firstWorld)
+        private EasyGame()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
-            
             IsMouseVisible = true;
             instance = this;
-            activeWorld = firstWorld;
-            graphics.PreferredBackBufferWidth = activeWorld.Width;
-            graphics.PreferredBackBufferHeight = activeWorld.Height;
-            graphics.ApplyChanges();
+            
         }
 
         public static EasyGame Instance
         {
             get
             {
+                if (instance == null)
+                {
+                    instance = new EasyGame();
+                }
                 return instance;
             }
         }
@@ -46,8 +47,15 @@ namespace EasyMonoGame
                 graphics.PreferredBackBufferWidth = activeWorld.Width;
                 graphics.PreferredBackBufferHeight = activeWorld.Height;
                 graphics.ApplyChanges();
-                GameArt.Load(); // use file names to load Texture2D
-                activeWorld.LoadContent();
+
+                if (hasLoadedContent)
+                {
+                    // Methodes below are called in method LoadContent,
+                    // the first time the game is loaded.
+                    GameArt.Load(); // use file names to load Texture2D
+                    activeWorld.LoadContent();
+                }
+                    
             }
         }
 
@@ -77,7 +85,7 @@ namespace EasyMonoGame
             SpriteFont font = resxContent.Load<SpriteFont>("all"); // ERROR resource is not binary
             */
             GameArt.SetFont(font);
-
+            hasLoadedContent = true;
         }
 
         protected override void Update(GameTime gameTime)
