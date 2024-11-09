@@ -35,6 +35,10 @@ namespace EasyMonoGame
                 return instance;
             }
         }
+        public bool HasLoadedContent
+        {
+            get { return hasLoadedContent; }
+        }
         public World ActiveWorld
         {
             get 
