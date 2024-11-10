@@ -17,7 +17,7 @@ namespace EasyMonoGame
     {
         private static Dictionary<string, Texture2D> images  = new Dictionary<string, Texture2D>();
         private static ContentManager content;
-        private static List<string> fileNames = new List<string>(); //TODO change to HashSet
+        private static HashSet<string> fileNames = new HashSet<string>(); 
         private static SpriteFont font;
 
         /// <summary>
@@ -67,7 +67,10 @@ namespace EasyMonoGame
             }
 
         }
-
+        public static bool Contains(string name)
+        {
+            return images.ContainsKey(name);
+        }
         public static Texture2D Get(string name) 
         { 
             return images[name]; 
