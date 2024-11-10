@@ -17,7 +17,7 @@ namespace EasyMonoGame
     {
         private static Dictionary<string, Texture2D> images  = new Dictionary<string, Texture2D>();
         private static ContentManager content;
-        private static List<string> fileNames = new List<string>();
+        private static List<string> fileNames = new List<string>(); //TODO change to HashSet
         private static SpriteFont font;
 
         /// <summary>
