@@ -1,8 +1,35 @@
 Library code to be used with MonoGame.
 =====================================
 
+
 TODO
 =======
+
+Add methods to Actor
+------------
+
+Add methods to World
+-----------
+
+Create Utils class
+------------------
+EasyUtil.cs
+
+Write demo code
+------------
+
+* Use mouse
+* sound
+* move left/right
+* move forward and rotate
+* collision detection
+* score
+* lifes
+* game over and restart game
+* levels - ok
+* enemies - random and clever
+* 
+
 Load fonts from this Library project. See:
 -----------
 
