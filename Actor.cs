@@ -90,6 +90,35 @@ namespace EasyMonoGame
             get { return image; }
             set { image = value; }
         }
+        /// <summary>
+        /// Set the x-coordinate for this actor.
+        /// </summary>
+        public float X
+        {
+            get
+            {
+                return position.X;
+            }
+            set
+            {
+                position.X = value;
+            }
+            
+        }
+        /// <summary>
+        /// Set the y-coordinate for this actor.
+        /// </summary>
+        public float Y
+        {
+            get
+            {
+                return position.Y;
+            }
+            set
+            {
+                position.Y = value;
+            }
+        }
 
 
 
@@ -149,6 +178,19 @@ namespace EasyMonoGame
             return null;
         }
         /// <summary>
+        /// Returns true if this actor is at the edge of the world.
+        /// </summary>
+        /// <returns></returns>
+        public bool IsAtEdge()
+        {
+            if (Position.X < 0 || Position.X > World.Width || Position.Y < 0 || Position.Y > World.Height)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        /// <summary>
         /// Move the actor in the direction it is facing.
         /// </summary>
         /// <param name="distance">distance in pixels</param>
@@ -168,20 +210,12 @@ namespace EasyMonoGame
             return Vector2.Distance(position, otherActor.Position) < Radius + otherActor.Radius;
         }
         /// <summary>
-        /// Set the x-coordinate for this actor.
+        /// Turn angle.
         /// </summary>
-        /// <param name="x"></param>
-        public void SetX(float x)
+        /// <param name="angle"></param>
+        public void Turn(float angle)
         {
-            position.X = x;
-        }
-        /// <summary>
-        /// Set the y-coordinate for this actor.
-        /// </summary>
-        /// <param name="y"></param>
-        public void SetY(float y)
-        {
-            position.Y = y;
+            Rotation += angle;
         }
         /// <summary>
         /// Turn this actor towards the specified coordinate.
