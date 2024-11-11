@@ -28,6 +28,7 @@ namespace EasyMonoGame
         private float rotation;
         private World world;
         private bool isFlippedHorizontally = false;
+        private float scaleRadius = 1.0f;
 
         public Actor()
         {
@@ -74,8 +75,20 @@ namespace EasyMonoGame
                 {
                     return 1; // image not loaded yet
                 }
-                return (image.Width + image.Height) / 4;
+                return ScaleRadius * (image.Width + image.Height) / 4;
             }
+        }
+        /// <summary>
+        /// Scale the radius of the collision detection circle. 
+        /// 
+        /// Example:
+        /// 0.9f makes it 90% of the original size.
+        /// 1.1f makes it 110% of the original size.
+        /// </summary>
+        public float ScaleRadius
+        {
+            get { return scaleRadius; }
+            set { scaleRadius = value; }
         }
         /// <summary>
         /// Set or get the rotation of this actor.
