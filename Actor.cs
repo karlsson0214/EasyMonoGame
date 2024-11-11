@@ -189,6 +189,20 @@ namespace EasyMonoGame
             }
             return false;
         }
+        /// <summary>
+        /// Returns true if this actor is touching an actor of the specified type.
+        /// 
+        /// Example:
+        /// 
+        /// IsTouching(typeof(ClassName))
+        /// </summary>
+        /// <param name="actorType"></param>
+        /// <returns></returns>
+        public bool IsTouching(Type actorType)
+        {
+            return GetOneIntersectingActor(actorType) != null;
+        }
+        
 
         /// <summary>
         /// Move the actor in the direction it is facing.
@@ -208,6 +222,23 @@ namespace EasyMonoGame
         public bool Intersects(Actor otherActor)
         {
             return Vector2.Distance(position, otherActor.Position) < Radius + otherActor.Radius;
+        }
+        /// <summary>
+        /// If this objekt is touching an actor of the specified type,
+        /// the other actor is removed.
+        /// 
+        /// Use IsTouching(...) first to ensure that this actor touch an actor of the specified type.
+        /// 
+        /// Exmaple:
+        /// 
+        /// RemoveTouching(typeof(ClassName))
+        /// </summary>
+        /// <param name="actorType"></param>
+        public void RemoveTouching(Type actorType)
+        {
+            var actor = GetOneIntersectingActor(actorType);
+            World.RemoveActor(actor);
+
         }
         /// <summary>
         /// Turn angle.
