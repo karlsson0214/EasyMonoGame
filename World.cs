@@ -175,22 +175,22 @@ namespace EasyMonoGame
                     if (isBounded)
                     {
                         // x-direciton
-                        if (actor.Position.X < 0)
+                        if (actor.X < 0)
                         {
-                            actor.SetX(0);
+                            actor.X = 0;
                         }
-                        else if (this.Width < actor.Position.X)
+                        else if (this.Width < actor.X)
                         {
-                            actor.SetX(this.Width);
+                            actor.X = this.Width;
                         }
                         // y-direction
-                        if (actor.Position.Y < 0)
+                        if (actor.Y < 0)
                         {
-                            actor.SetY(0);
+                            actor.Y = 0;
                         }
-                        else if (this.Height < actor.Position.Y)
+                        else if (this.Height < actor.Y)
                         {
-                            actor.SetY(this.Height);
+                            actor.Y = this.Height;
                         }
                     }
                 }
