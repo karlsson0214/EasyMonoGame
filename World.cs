@@ -13,6 +13,7 @@ namespace EasyMonoGame
         private SortedSet<Type> updateOrder; // first is  updated first
         private SortedSet<Type> drawOrder; // first is drawn on top, that is drawn last
         internal Dictionary<Type, List<Actor>> actors; //TODO make private
+        private List<Actor> actorsToRemove = new List<Actor>();
         private Dictionary<Vector2, Text> texts;
         private bool isBounded = true;
         private int width;
@@ -170,36 +171,43 @@ namespace EasyMonoGame
             {
                 foreach (var actor in pair.Value)
                 {
-                    actor.Update(gameTime);
-                    // Keep actor inside of screen
-                    if (isBounded)
+                    if (actor.World == this)
                     {
-                        // x-direciton
-                        if (actor.X < 0)
+                        actor.Update(gameTime);
+                        // Keep actor inside of screen
+                        if (isBounded)
                         {
-                            actor.X = 0;
-                        }
-                        else if (this.Width < actor.X)
-                        {
-                            actor.X = this.Width;
-                        }
-                        // y-direction
-                        if (actor.Y < 0)
-                        {
-                            actor.Y = 0;
-                        }
-                        else if (this.Height < actor.Y)
-                        {
-                            actor.Y = this.Height;
+                            // x-direciton
+                            if (actor.X < 0)
+                            {
+                                actor.X = 0;
+                            }
+                            else if (this.Width < actor.X)
+                            {
+                                actor.X = this.Width;
+                            }
+                            // y-direction
+                            if (actor.Y < 0)
+                            {
+                                actor.Y = 0;
+                            }
+                            else if (this.Height < actor.Y)
+                            {
+                                actor.Y = this.Height;
+                            }
                         }
                     }
                 }
 
             }
-
-
+            // Remove actors that are marked for removal.
+            foreach (Actor actor in actorsToRemove)
+            {
+                Remove(actor);
+            }
+            actorsToRemove.Clear();
         }
-        
+
 
 
         private void TileBackground(SpriteBatch spriteBatch)
@@ -227,6 +235,11 @@ namespace EasyMonoGame
         }
 
         public void RemoveActor(Actor actor)
+        {
+            actor.World = null;
+            actorsToRemove.Add(actor);
+        }
+        private void Remove(Actor actor)
         {
             List<Actor> actorsOfType = actors[actor.GetType()];
             if (actorsOfType != null)

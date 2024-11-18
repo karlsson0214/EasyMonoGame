@@ -70,7 +70,10 @@ namespace EasyMonoGame
         {
             get
             {
-                
+                if (world == null)
+                {
+                    throw new Exception("Actor must be in a world.");
+                }
                 if (image == null)
                 {
                     return 1; // image not loaded yet
@@ -177,12 +180,20 @@ namespace EasyMonoGame
         /// <returns></returns>
         public Actor GetOneIntersectingActor(Type actorType)
         {
+            if (world == null)
+            {
+                throw new Exception("Actor must be in a world.");
+            }
             if (world.actors.ContainsKey(actorType))
             {
                 List<Actor> actorsOfType = world.actors[actorType];
                 foreach (var actor in actorsOfType)
                 {
-                    if (Intersects(actor))
+                    if (this == actor)
+                    {
+                        continue;
+                    }
+                    if (Intersects(actor) && actor.World != null)
                     {
                         return actor;
                     }
@@ -223,6 +234,10 @@ namespace EasyMonoGame
         /// <param name="distance">distance in pixels</param>
         public void Move(float distance)
         {
+            if (world == null)
+            {
+                throw new Exception("Actor must be in a world.");
+            }
             var direction = new Vector2((float)Math.Cos(MathHelper.ToRadians(rotation)), (float)Math.Sin(MathHelper.ToRadians(rotation)));
             position += direction * distance;
         }
@@ -234,6 +249,18 @@ namespace EasyMonoGame
         /// <returns></returns>
         public bool Intersects(Actor otherActor)
         {
+            if (world == null)
+            {
+                throw new Exception("Actor must be in a world.");
+            }
+            if (otherActor.World == null)
+            {
+                return false;
+            }
+            if (otherActor == this)
+            {
+                return false;
+            }
             return Vector2.Distance(position, otherActor.Position) < Radius + otherActor.Radius;
         }
         /// <summary>
