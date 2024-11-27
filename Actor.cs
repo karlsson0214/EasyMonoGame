@@ -298,13 +298,24 @@ namespace EasyMonoGame
             Vector2 directionToOther = new Vector2(x, y) - Position;
             rotation = VectorToAngleInDegrees(directionToOther);
         }
+        /// <summary>
+        /// This method is called once per frame. Implement game logic in this method.
+        /// </summary>
+        public virtual void Act()
+        {
+
+        }
 
         /// <summary>
-        /// override this method in an enheriting class. 
+        /// override this method in an inheriting class. 
         /// Implement game logic in the overriding method.
+        /// Do NOT call base.Update(gameTime) in the overriding method.
         /// </summary>
         /// <param name="gameTime"></param>
-        public abstract void Update(GameTime gameTime);
+        public virtual void Update(GameTime gameTime)
+        {
+            Act();
+        }
 
         private float VectorToAngleInDegrees(Vector2 direction)
         {
