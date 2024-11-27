@@ -13,6 +13,7 @@ namespace EasyMonoGame
         private World activeWorld;
         private static EasyGame instance;
         private bool hasLoadedContent = false;
+        private bool isPaused = false;
 
         private EasyGame()
         {
@@ -38,6 +39,16 @@ namespace EasyMonoGame
         public bool HasLoadedContent
         {
             get { return hasLoadedContent; }
+        }
+        /// <summary>
+        /// Pause the game, or restart the game.
+        /// 
+        /// Press P to unpause the game.
+        /// </summary>
+        public bool IsPaused
+        {
+            get { return isPaused; }
+            set { isPaused = value; }
         }
         public World ActiveWorld
         {
@@ -97,6 +108,14 @@ namespace EasyMonoGame
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
                 Exit();
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.P))
+            {
+                isPaused = false;
+            }
+            if (isPaused)
+            {
+                return;
             }
 
             // TODO: Add your update logic here
