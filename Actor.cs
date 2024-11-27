@@ -144,7 +144,7 @@ namespace EasyMonoGame
         /// Called once per frame to draw actor to the screen.
         /// </summary>
         /// <param name="spriteBatch"></param>
-        public void Draw(SpriteBatch spriteBatch)
+        internal void Draw(SpriteBatch spriteBatch)
         {
             /*
             if (image == null)
