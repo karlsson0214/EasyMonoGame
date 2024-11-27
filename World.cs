@@ -121,9 +121,7 @@ namespace EasyMonoGame
             if (actors.ContainsKey(actorType))
             {
                 List<Actor> actorsOfTypeInWorld = new List<Actor>();
-                List<Actor> actorsOfType;
-                actorsOfType = actors[actorType];
-                foreach (var actor in actorsOfType)
+                foreach (var actor in actors[actorType])
                 {
                     if (actor.World == this)
                     {
@@ -139,6 +137,27 @@ namespace EasyMonoGame
             }
             return null;
 
+        }
+        /// <summary>
+        /// Get the number of actors of the specified type in this world.
+        /// </summary>
+        /// <param name="actorType"></param>
+        /// <returns></returns>
+        public int NumberOfActors(Type actorType)
+        {
+            if (actors.ContainsKey(actorType))
+            {
+                int count = 0;
+                foreach (var actor in actors[actorType])
+                {
+                    if (actor.World == this)
+                    {
+                        ++count;
+                    }
+                }
+                return count;
+            }
+            return 0;
         }
         /// <summary>
         /// Show text at the specified coordinate. 
