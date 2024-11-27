@@ -219,10 +219,17 @@ namespace EasyMonoGame
 
             }
         }
+        /// <summary>
+        /// Called once per frame. Override this method to add game logic.
+        /// </summary>
+        public virtual void Act()
+        {
+        }
 
-
-
-
+        /// <summary>
+        /// Called once per frame. Update the state of the world.
+        /// </summary>
+        /// <param name="gameTime"></param>
         public virtual void Update(GameTime gameTime)
         {
             foreach (var pair in actors)
@@ -256,6 +263,7 @@ namespace EasyMonoGame
                         }
                     }
                 }
+                Act();
 
             }
             // Add actors that are marked for addition. 
