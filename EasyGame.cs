@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 
 
 namespace EasyMonoGame
@@ -14,6 +15,7 @@ namespace EasyMonoGame
         private static EasyGame instance;
         private bool hasLoadedContent = false;
         private bool isPaused = false;
+        private Random random;
 
         private EasyGame()
         {
@@ -22,7 +24,7 @@ namespace EasyMonoGame
 
             IsMouseVisible = true;
             instance = this;
-            
+            random = new Random();
         }
 
         public static EasyGame Instance
@@ -72,6 +74,13 @@ namespace EasyMonoGame
                 }
                     
             }
+        }
+        /// <summary>
+        /// Get the random number generator for this game.
+        /// </summary>
+        public Random Random
+        {
+            get { return random; }
         }
 
         protected override void Initialize()
