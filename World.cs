@@ -76,6 +76,7 @@ namespace EasyMonoGame
         {
             actor.ImageName = imageName;
             actor.Position = new Vector2(x, y);
+            actor.World = this;
             actorsToAdd.Add(actor);
         }
         /// <summary>
@@ -100,14 +101,14 @@ namespace EasyMonoGame
             if (actors.TryGetValue(actor.GetType(), out List<Actor> actorsOfType))
             {
                 actorsOfType.Add(actor);
-                actor.World = this;
+                //actor.World = this;
             }
             else
             {
                 List<Actor> actorsOfNewType = new List<Actor>();
                 actorsOfNewType.Add(actor);
                 actors.Add(actor.GetType(), actorsOfNewType);
-                actor.World = this;
+                //actor.World = this;
             }
 
         }
