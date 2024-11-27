@@ -112,6 +112,35 @@ namespace EasyMonoGame
 
         }
         /// <summary>
+        /// Get all actors of the specified type.
+        /// </summary>
+        /// <param name="actorType"></param>
+        public List<Actor> GetActors(Type actorType)
+        {
+            
+            if (actors.ContainsKey(actorType))
+            {
+                List<Actor> actorsOfTypeInWorld = new List<Actor>();
+                List<Actor> actorsOfType;
+                actorsOfType = actors[actorType];
+                foreach (var actor in actorsOfType)
+                {
+                    if (actor.World == this)
+                    {
+                        actorsOfTypeInWorld.Add(actor);
+                    }
+                        
+                }
+                if (actorsOfTypeInWorld.Count == 0)
+                {
+                    return null;
+                }
+                return actorsOfTypeInWorld;
+            }
+            return null;
+
+        }
+        /// <summary>
         /// Show text at the specified coordinate. 
         /// 
         /// A new text at the same coordinate will replace the other text.
@@ -250,6 +279,10 @@ namespace EasyMonoGame
                 }
             }
         }
+        /// <summary>
+        /// Remove the specified actor from this world.
+        /// </summary>
+        /// <param name="actor"></param>
 
         public void RemoveActor(Actor actor)
         {
