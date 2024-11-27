@@ -14,6 +14,7 @@ namespace EasyMonoGame
         private SortedSet<Type> drawOrder; // first is drawn on top, that is drawn last
         internal Dictionary<Type, List<Actor>> actors; //TODO make private
         private List<Actor> actorsToRemove = new List<Actor>();
+        private List<Actor> actorsToAdd = new List<Actor>();
         private Dictionary<Vector2, Text> texts;
         private bool isBounded = true;
         private int width;
@@ -70,11 +71,19 @@ namespace EasyMonoGame
         /// <summary>
         /// Add an actor to this world.
         /// </summary>
-        /// <param name="actor"></param>
+        /// <param name="actor"></param
         public void Add(Actor actor, string imageName, float x, float y)
         {
             actor.ImageName = imageName;
             actor.Position = new Vector2(x, y);
+            actorsToAdd.Add(actor);
+        }
+        /// <summary>
+        /// Add actors to this world after call to Update.
+        /// </summary>
+        /// <param name="actor"></param>
+        private void AddActor(Actor actor)
+        {
             GameArt.Add(actor.ImageName);
             // LoadContent in EasyGame has been called and actor.Image is null. => Set image from GameArt.
             if (EasyGame.Instance.HasLoadedContent && actor.Image == null)
@@ -200,6 +209,14 @@ namespace EasyMonoGame
                 }
 
             }
+            // Add actors that are marked for addition. 
+            // Cannot add actor in the middle of the loop above, 
+            // becase it will cause an Exception.
+            foreach (Actor actor in actorsToAdd)
+            {
+                AddActor(actor);
+            }
+            actorsToAdd.Clear();
             // Remove actors that are marked for removal.
             foreach (Actor actor in actorsToRemove)
             {
