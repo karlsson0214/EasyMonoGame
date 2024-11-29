@@ -42,6 +42,29 @@ namespace EasyMonoGame
             get { return world; }
             internal set { world = value; }
         }
+
+        public float Width
+        {
+            get
+            {
+                if (image == null)
+                {
+                    return 0;
+                }
+                return image.Width;
+            }
+        }
+        public float Height
+        {
+            get
+            {
+                if (image == null)
+                {
+                    return 0;
+                }
+                return image.Height;
+            }
+        }
         /// <summary>
         /// Set or get the image name for this actor.
         /// </summary>
