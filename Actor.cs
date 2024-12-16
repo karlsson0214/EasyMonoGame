@@ -25,7 +25,6 @@ namespace EasyMonoGame
         private bool isFlippedHorizontally = false;
         private float scaleRadius = 1.0f;
 
-
         /// <summary>
         /// Get the world this actor lives in.
         /// </summary>
@@ -34,7 +33,9 @@ namespace EasyMonoGame
             get { return world; }
             internal set { world = value; }
         }
-
+        /// <summary>
+        /// Get the width of the Actor.
+        /// </summary>
         public float Width
         {
             get
@@ -46,6 +47,9 @@ namespace EasyMonoGame
                 return image.Width;
             }
         }
+        /// <summary>
+        /// Get the height of the Actor.
+        /// </summary>
         public float Height
         {
             get
@@ -65,6 +69,9 @@ namespace EasyMonoGame
             get { return imageName; }
             set { imageName = value; }
         }
+        /// <summary>
+        /// Set or get if this actor is flipped horizontally.
+        /// </summary>
         public bool IsFlippedHorizontally
         {
             get { return isFlippedHorizontally; }

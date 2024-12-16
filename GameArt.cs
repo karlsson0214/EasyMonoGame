@@ -62,10 +62,20 @@ namespace EasyMonoGame
             }
 
         }
+        /// <summary>
+        /// Check if an image is loaded.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public static bool Contains(string name)
         {
             return images.ContainsKey(name);
         }
+        /// <summary>
+        /// Get an image.
+        /// </summary>
+        /// <param name="name">The image name.</param>
+        /// <returns></returns>
         public static Texture2D Get(string name) 
         { 
             return images[name]; 

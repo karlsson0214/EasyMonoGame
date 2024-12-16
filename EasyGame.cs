@@ -6,6 +6,9 @@ using System;
 
 namespace EasyMonoGame
 {
+    /// <summary>
+    /// This class represents the game. It is a singleton class.
+    /// </summary>
     public class EasyGame : Game
     {
         private GraphicsDeviceManager graphics;
@@ -26,7 +29,9 @@ namespace EasyMonoGame
             instance = this;
             random = new Random();
         }
-
+        /// <summary>
+        /// Get the instance of this class.
+        /// </summary>
         public static EasyGame Instance
         {
             get
@@ -39,7 +44,7 @@ namespace EasyMonoGame
             }
         }
         
-        public bool HasLoadedContent
+        internal bool HasLoadedContent
         {
             get { return hasLoadedContent; }
         }
@@ -53,6 +58,9 @@ namespace EasyMonoGame
             get { return isPaused; }
             set { isPaused = value; }
         }
+        /// <summary>
+        /// Get or set the active world.
+        /// </summary>
         public World ActiveWorld
         {
             get 
@@ -83,7 +91,9 @@ namespace EasyMonoGame
         {
             get { return random; }
         }
-
+        /// <summary>
+        /// Used by MonoGame to initialize the game.
+        /// </summary>
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
@@ -91,7 +101,9 @@ namespace EasyMonoGame
             base.Initialize();
             
         }
-
+        /// <summary>
+        /// Used by MonoGame to load content.
+        /// </summary>
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
@@ -112,7 +124,10 @@ namespace EasyMonoGame
             GameArt.SetFont(font);
             hasLoadedContent = true;
         }
-
+        /// <summary>
+        /// Used by MonoGame to update the game each frame.
+        /// </summary>
+        /// <param name="gameTime"></param>
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
@@ -137,7 +152,10 @@ namespace EasyMonoGame
 
             base.Update(gameTime);
         }
-
+        /// <summary>
+        /// Used by MonoGame to draw the game each frame.
+        /// </summary>
+        /// <param name="gameTime"></param>
         protected override void Draw(GameTime gameTime)
         {
             if (activeWorld == null)
