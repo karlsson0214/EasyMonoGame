@@ -220,6 +220,37 @@ namespace EasyMonoGame
             return null;
         }
         /// <summary>
+        /// Get all actors of the specified type that intersect with this actor.
+        /// </summary>
+        /// <param name="actorType"></param>
+        /// <returns>Returns a list of actors. 
+        /// The list is empty if no intersecting actor was found. </returns>
+        /// <exception cref="Exception">This actor must be in a world.</exception>
+        public List<Actor> GetAllIntersectingActors(Type actorType)
+        {
+            if (world == null)
+            {
+                throw new Exception("Actor must be in a world.");
+            }
+            List<Actor> intersectingActors = new List<Actor>();
+            if (world.actors.ContainsKey(actorType))
+            {
+                List<Actor> actorsOfType = world.actors[actorType];
+                foreach (var actor in actorsOfType)
+                {
+                    if (this == actor)
+                    {
+                        continue;
+                    }
+                    if (Intersects(actor) && actor.World != null)
+                    {
+                        intersectingActors.Add(actor);
+                    }
+                }
+            }
+            return intersectingActors;
+        }
+        /// <summary>
         /// Returns true if this actor is at the edge of the world.
         /// </summary>
         /// <returns></returns>
