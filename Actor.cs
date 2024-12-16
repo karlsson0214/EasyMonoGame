@@ -230,7 +230,7 @@ namespace EasyMonoGame
         /// <returns>Returns a list of actors. 
         /// The list is empty if no intersecting actor was found. </returns>
         /// <exception cref="Exception">This actor must be in a world.</exception>
-        public List<Actor> GetAllIntersectingActors(Type actorType)
+        public List<Actor> GetIntersectingActors(Type actorType)
         {
             if (world == null)
             {
