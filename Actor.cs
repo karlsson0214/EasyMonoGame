@@ -315,6 +315,32 @@ namespace EasyMonoGame
                 return false;
             }
             return Vector2.Distance(position, otherActor.Position) < Radius + otherActor.Radius;
+        }        
+        /// <summary>
+        /// Returns true if this actor, when moved the distance deltaX and deltaY,
+        /// intersects with the other actor, 
+        /// otherwise false.
+        /// </summary>
+        /// <param name="otherActor"></param>
+        /// <param name="deltaX"></param>
+        /// <param name="deltaY"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public bool Intersects(Actor otherActor, float deltaX, float deltaY)
+        {
+            if (world == null)
+            {
+                throw new Exception("Actor must be in a world.");
+            }
+            if (otherActor.World == null)
+            {
+                return false;
+            }
+            if (otherActor == this)
+            {
+                return false;
+            }
+            return Vector2.Distance(position + new Vector2(deltaX, deltaY), otherActor.Position) < Radius + otherActor.Radius;
         }
         /// <summary>
         /// If this objekt is touching an actor of the specified type,
