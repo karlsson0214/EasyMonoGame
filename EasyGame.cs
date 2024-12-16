@@ -15,7 +15,7 @@ namespace EasyMonoGame
         private bool hasLoadedContent = false;
         private bool isPaused = false;
         private Random random;
-        private Color backgroundColor = Color.CornflowerBlue;
+        
 
         private EasyGame()
         {
@@ -38,11 +38,7 @@ namespace EasyMonoGame
                 return instance;
             }
         }
-        public Color BackgroundColor
-        {
-            get { return backgroundColor; }
-            set { backgroundColor = value; }
-        }
+        
         public bool HasLoadedContent
         {
             get { return hasLoadedContent; }
@@ -144,7 +140,14 @@ namespace EasyMonoGame
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(backgroundColor);
+            if (activeWorld == null)
+            {
+                GraphicsDevice.Clear(Color.CornflowerBlue);
+            }
+            else
+            {
+                GraphicsDevice.Clear(activeWorld.BackgroundColor);
+            }
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();

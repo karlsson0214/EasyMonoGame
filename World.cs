@@ -19,6 +19,7 @@ namespace EasyMonoGame
         private int width;
         private int height;
         private string backgroundTileName;
+        private Color backgroundColor = Color.CornflowerBlue;
         /// <summary>
         /// Inherit this class to create a world for your game.
         /// </summary>
@@ -34,6 +35,14 @@ namespace EasyMonoGame
             //IsMouseVisible = true;
             actors = new Dictionary<Type, List<Actor>>();
             texts = new Dictionary<Vector2, Text>();
+        }
+        /// <summary>
+        /// Set or get the background color for this world.
+        /// </summary>
+        public Color BackgroundColor
+        {
+            get { return backgroundColor; }
+            set { backgroundColor = value; }
         }
         /// <summary>
         /// Set or get the background image for this world. 
