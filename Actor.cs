@@ -20,15 +20,12 @@ namespace EasyMonoGame
         private Vector2 position;
         // rotation in degrees
         // 0 = right, 90 = down, 180 = left, 270 = up
-        private float rotation;
+        private float rotation = 0;
         private World world;
         private bool isFlippedHorizontally = false;
         private float scaleRadius = 1.0f;
 
-        public Actor()
-        {
-            rotation = 0;
-        }
+
         /// <summary>
         /// Get the world this actor lives in.
         /// </summary>
